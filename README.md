@@ -9,3 +9,4 @@
 ]
 ![https://raw.githubusercontent.com/cuihengyuan/ELF/master/tmp2(1).gif
 ]
+这些gif成功避开了BUG。。。。。
