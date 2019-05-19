@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Style for "" -->
+    <!-- Add this snippet to layer-list xml in drawable. -->
+    <!-- Style for "" -->
+    <!-- Add this snippet to layer-list xml in drawable. -->
+    <item android:width="7dp" android:height="15dp"
+
+        >
+        <shape android:shape="rectangle">
+            <stroke
+                android:width="2dp" android:color="#5476ac" />
+        </shape>
+    </item>
+    <item android:width="7dp" android:height="15dp"
+android:drawable="@drawable/ic_back"
+        >
+        <shape android:shape="rectangle">
+            <stroke android:width="2dp"  />
+        </shape>
+    </item>
+
+</layer-list>

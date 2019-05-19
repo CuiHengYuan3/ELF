@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SongDitailActivity"
+    android:orientation="vertical"
+    >
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/detai_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/whilt"
+        app:navigationIcon="@drawable/ic_back"
+        app:subtitle="子标题"
+        app:title="标题"
+        app:titleTextColor="@color/black"
+        android:gravity="center"
+        />
+    </android.support.design.widget.AppBarLayout>
+
+<ImageView
+   android:layout_marginTop="20dp"
+    android:layout_width="300dp"
+    android:layout_height="200dp"
+    android:id="@+id/detail_imag"
+    android:layout_gravity="center"
+    />
+<com.example.lenovo.elf.util.LrcView
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:id="@+id/detail_lrcView"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+android:layout_marginTop="25dp"
+    >
+</com.example.lenovo.elf.util.LrcView>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="25dp"
+    android:id="@+id/detail_line1"
+    android:orientation="horizontal"
+  android:layout_marginTop="20dp"
+    >
+   <ImageView
+       android:layout_weight="1"
+       android:layout_width="0dp"
+       android:layout_height="match_parent"
+       android:id="@+id/download"
+       android:src="@mipmap/ic_download"
+
+       />
+    <ImageView
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/detail_collect"
+        android:src="@mipmap/ic_star_off"
+
+        />
+    <ImageView
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/Give_like"
+        android:src="@mipmap/ic_like_off"
+
+        />
+    <ImageView
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/detai_comment"
+        android:src="@mipmap/ic_commend"
+        />
+</LinearLayout>
+<SeekBar
+    android:layout_width="300dp"
+    android:layout_height="3dp"
+    android:id="@+id/SeekBar"
+   android:layout_gravity="center"
+   android:layout_marginTop="25dp"
+    />
+  <LinearLayout
+      android:layout_width="300dp"
+      android:layout_height="20dp"
+      android:orientation="horizontal"
+      android:layout_gravity="center"
+      android:layout_marginTop="5dp"
+      >
+      <TextView
+          android:layout_width="40dp"
+          android:layout_height="20dp"
+          android:id="@+id/courrent"
+          />
+      <TextView
+          android:layout_width="40dp"
+          android:layout_height="20dp"
+          android:id="@+id/total"
+          android:layout_marginLeft="220dp"
+          />
+  </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="19dp"
+        android:layout_width="230dp"
+        android:layout_height="35dp"
+        android:orientation="horizontal"
+       android:layout_gravity="center"
+        >
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/backSong"
+        android:src="@mipmap/ic_move_back"
+            />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/playOrPause"
+            android:src="@drawable/ic_play_running"
+            />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/forwordSong"
+            android:src="@mipmap/ic_move_forward"
+            />
+
+    </LinearLayout>
+</android.support.v7.widget.LinearLayoutCompat>
