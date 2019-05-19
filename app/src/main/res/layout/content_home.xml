@@ -10,19 +10,24 @@
     tools:showIn="@layout/app_bar_home">
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="500dp"
+    android:layout_height="450dp"
     android:id="@+id/lrcContainer"
     android:visibility="gone"
     >
+
+   <android.support.design.widget.CoordinatorLayout
+       android:layout_height="match_parent"
+       android:layout_width="match_parent">
     <com.example.lenovo.elf.util.LrcView
-        android:layout_width="20dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/LrcView"
         android:background="@color/whilt"
-
         />
+
+   </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>
-<LinearLayout
+    <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="220dp"
     android:orientation="horizontal"
@@ -48,7 +53,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:orientation="horizontal"
 
         >

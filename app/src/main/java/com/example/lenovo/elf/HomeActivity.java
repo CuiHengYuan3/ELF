@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.View;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -77,7 +78,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayout lineMycollection;
     LinearLayout linesetting;
     LinearLayout myImageContainer;
-int courentTime;
+    int courentTime;
     List<SongListModel> modelList = new ArrayList<>();
     public myMadiaPlayer mediaPlayer;
     int courrentNum = 0;
@@ -89,6 +90,27 @@ int courentTime;
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+     toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             Intent intent2 = new Intent(HomeActivity.this, SongDitailActivity.class);
+             intent2.putExtra("madiaPlayer", mediaPlayer);
+             //   intent2.putExtra("LrcString",)
+             intent2.putExtra("lrcString", lrcToBePass);
+             intent2.putExtra("songName", songName);
+             intent2.putExtra("picUrl", picUrl);
+             intent2.putExtra("list", (Serializable) modelList);
+             intent2.putExtra("courrent", courrentNum);
+             courentTime = mediaPlayer.getCurrentPosition();
+             mediaPlayer.stop();
+             if (mTimer != null && mTask != null) {
+                 mTimer.cancel();
+                 mTask.cancel();
+             }
+             startActivity(intent2);
+
+         }
+     });
         intiView();
         loader = new Loader(HomeActivity.this);
         sendRequest(2332160280L);
@@ -111,18 +133,16 @@ int courentTime;
                 line_lrcContainer.setVisibility(View.VISIBLE);
                 myImageContainer.setVisibility(View.GONE);
                 myImageView.setVisibility(View.GONE);
-                    break;
-            case  R.id.lrcContainer:
-                myImageContainer.setVisibility(View.VISIBLE);
-                myImageView.setVisibility(View.VISIBLE);
-                line_lrcContainer.setVisibility(View.GONE);
-
-                //                ValueAnimator objectAnimator = ObjectAnimator.ofFloat(, "scaleX", 1f, 0.3f);
-//                objectAnimator.setDuration(3000);
-//                objectAnimator.setRepeatCount(1);
-//                objectAnimator.setRepeatMode(ValueAnimator.REVERSE);
-//                objectAnimator.start();
                 break;
+//            case R.id.cover:
+//                line_lrcContainer.setVisibility(View.GONE);
+//                myImageContainer.setVisibility(View.VISIBLE);
+//                myImageView.setVisibility(View.VISIBLE);
+//  case  R.id.lrcContainer:
+//                myImageContainer.setVisibility(View.VISIBLE);
+//                myImageView.setVisibility(View.VISIBLE);
+//                line_lrcContainer.setVisibility(View.GONE);
+//                break;
             case R.id.line:
                 line_lrcContainer.setVisibility(View.VISIBLE);
                 myImageView.setVisibility(View.GONE);
@@ -140,9 +160,10 @@ int courentTime;
                     intent2.putExtra("courrent", courrentNum);
                     courentTime = mediaPlayer.getCurrentPosition();
                     mediaPlayer.stop();
-                    if (mTimer!=null&&mTask!=null){
-                    mTimer.cancel();
-                    mTask.cancel();}
+                    if (mTimer != null && mTask != null) {
+                        mTimer.cancel();
+                        mTask.cancel();
+                    }
                     startActivity(intent2);
                 }
                 break;
@@ -170,7 +191,7 @@ int courentTime;
 
     void sendOtherRequest(Long ID) {
         sendRequest(ID);
-        isShowAll=false;
+        isShowAll = false;
         hideAlleotion();
         if (ID == 772031667L) {
             happyimag.setImageResource(R.mipmap.ic_mood_unhappy);
@@ -186,7 +207,7 @@ int courentTime;
     }
 
     void showAllEotion() {
-       isShowAll=true;
+        isShowAll = true;
         happyimag.setVisibility(View.VISIBLE);
         unhappyimag.setVisibility(View.VISIBLE);
         calmiamg.setVisibility(View.VISIBLE);
@@ -201,6 +222,7 @@ int courentTime;
     }
 
     void intiView() {
+
         tv_singer = findViewById(R.id.singer);
         tv_songNmae = findViewById(R.id.songName);
         lineDayily = findViewById(R.id.recommend);
@@ -223,14 +245,15 @@ int courentTime;
         line_lrcContainer = findViewById(R.id.lrcContainer);
         myImageView.setOnClickListener(this);
         mLrcView = findViewById(R.id.LrcView);
-        ((View) mLrcView).setOnClickListener(this);
+
         LinearLayout linearLayout = findViewById(R.id.line);
         linearLayout.setOnClickListener(this);
         playImag.setOnClickListener(this);
         myImageContainer = findViewById(R.id.myImageContainer);
-      playImag.setClickable(false);
-     happyimag.setClickable(false);
-    line_lrcContainer.setOnClickListener(this);
+        playImag.setClickable(false);
+        happyimag.setClickable(false);
+        line_lrcContainer.setOnClickListener(this);
+
         //        tv_progress = findViewById(R.id.progress);
 //        tv_total = findViewById(R.id.total);
 //        sb = findViewById(R.id.seekBar);
@@ -263,9 +286,10 @@ int courentTime;
     }
 
     void sendRequest(final Long SongListID) {
-        if (mTimer!=null){
+        if (mTimer != null) {
             mTimer.cancel();
-        }if (mTask!=null){
+        }
+        if (mTask != null) {
             mTask.cancel();
         }
         HttpUtil.senHttpReqest("http://elf.egos.hosigus.com/music/playlist/detail?id=" + SongListID, new CallBackListener() {
@@ -300,8 +324,8 @@ int courentTime;
                         @Override
                         public void run() {
                             toNextSong(courrentNum);
-                        playImag.setClickable(true);
-                        happyimag.setClickable(true);
+                            playImag.setClickable(true);
+                            happyimag.setClickable(true);
                         }
                     });
                 } catch (JSONException e) {
@@ -330,9 +354,10 @@ int courentTime;
 //        }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     void toNextSong(int courent) {
-        if (mTimer!=null){
+        if (mTimer != null) {
             mTimer.cancel();
-        }if (mTask!=null){
+        }
+        if (mTask != null) {
             mTask.cancel();
         }
         SongListModel songListModelone = modelList.get(courent);
@@ -345,9 +370,9 @@ int courentTime;
         int songId = songListModelone.getSongID();
         sendlrcReqeuest(songId, mLrcView, builder);
         String baseUrl = "http://music.163.com/song/media/outer/url?id=";
-      if (mediaPlayer!=null) {
-          mediaPlayer.release();
-      }
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+        }
         mediaPlayer = new myMadiaPlayer();
         try {
             mediaPlayer.setDataSource(baseUrl + songId + ".mp3");
@@ -373,9 +398,10 @@ int courentTime;
             @Override
             public void onCompletion(MediaPlayer mp) {
                 courrentNum++;
-         if (mTimer!=null&&mTask!=null){
-             mTimer.cancel();
-              mTask.cancel();}
+                if (mTimer != null && mTask != null) {
+                    mTimer.cancel();
+                    mTask.cancel();
+                }
                 toNextSong(courrentNum);
 
             }
@@ -450,7 +476,7 @@ int courentTime;
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    mediaPlayer.release();
+        mediaPlayer.release();
     }
 }
 

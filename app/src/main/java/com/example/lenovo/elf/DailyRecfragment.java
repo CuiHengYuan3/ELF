@@ -16,5 +16,6 @@ public class DailyRecfragment extends Fragment {
 
 View view=inflater.inflate(R.layout.dailyre_layout,container,false);
 return  view;
+
     }
 }
